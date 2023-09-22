@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.generation.alexandria.model.entities.User;
@@ -38,4 +40,26 @@ public class MainController
 		
 		return "homepage";
 	}
+	
+	@PostMapping ("/login")			//bindo la form alla variabile user di tipo User
+	public String login(@ModelAttribute("tempusr") User user, Model model)
+	{
+		User  ondb = userRepo.findByUsername(user.getUsername());
+		if(ondb==null || !ondb.getPassword().equals(user.getPassword())) //se non c'è utente con questo nome o la pass non corrisponde
+		{
+			model.addAttribute("errormessage", "Nome utente o password errati");
+			return "loginpage";											//torniamo a loginpage
+		}
+		
+		model.addAttribute("user", ondb);
+		return "redirect:/";
+		
+	}
+	
+	@GetMapping("/guestlogin")
+	public String guestlogin()
+	{
+		return "homepage";
+	}
 }
+
