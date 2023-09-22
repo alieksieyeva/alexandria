@@ -1,20 +1,26 @@
 package com.generation.alexandria.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.generation.alexandria.model.entities.Book;
+import com.generation.alexandria.model.entities.Cart;
 import com.generation.alexandria.model.entities.User;
 import com.generation.alexandria.model.repository.AuthorRepository;
 import com.generation.alexandria.model.repository.BookRepository;
+import com.generation.alexandria.model.repository.OrderRepository;
 import com.generation.alexandria.model.repository.UserRepository;
 
 @Controller 
-@SessionAttributes("user")
+@SessionAttributes({"user", "cart"})
 public class MainController
 {
 	@Autowired					//all'avvio del progetto saranno forniti 
@@ -26,6 +32,9 @@ public class MainController
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	OrderRepository orderRepo;
+	
 	@GetMapping("/")
 	public String initialPage(Model model)
 	{
@@ -35,9 +44,10 @@ public class MainController
 			currentUser=userRepo.findByUsername("guest");
 			model.addAttribute("user", currentUser); //metto questo user come attributo di sessione 
 											//(sarebbe stato attributo di request senza @SessionAttributes("user"))
+			model.addAttribute("cart",new Cart());
+			
 			return "loginpage";
 		}
-		
 		return "homepage";
 	}
 	
@@ -54,6 +64,7 @@ public class MainController
 		}
 		
 		model.addAttribute("user", ondb);
+		model.addAttribute("cart",new Cart());
 		return "redirect:/";
 		
 	}
@@ -94,6 +105,39 @@ public class MainController
 	{
 		model.addAttribute("user", new User() ); //ripulire user
 		return "redirect:/";
+	}
+	
+	@GetMapping("/bookscatalogue")
+	public String allbooks(Model model)
+	{
+		List <Book> all = bookRepo.findByOrderByTitleAsc();
+		model.addAttribute("books", all);
+		
+		return "listbooks";
+		
+	}
+	
+	@GetMapping("/addToCart")
+	public String addToCart(@RequestParam int id, @RequestParam int copies, Model model, @RequestParam(required=false) String src)
+	{
+		Book b = bookRepo.findById(id).get(); //questo metodo restituisce un oggetto di tipo Optional.
+												//il mio libro è dentro Optional, optional.get() mi dà il libro 
+		Cart c = (Cart) model.getAttribute("cart");
+		if(copies>0)
+			c.add(b, copies);
+		else
+			c.remove(b, copies*-1);
+		
+		model.addAttribute("cart",c);
+		if(src !=null && src.equals("cartpage"))
+			return "redirect:/cartpage";
+		return "redirect:/bookscatalogue";
+	}
+	
+	@GetMapping("/cartpage")
+	public String goToCart()
+	{
+		return "cartpage";
 	}
 }
 

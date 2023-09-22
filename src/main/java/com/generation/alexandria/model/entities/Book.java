@@ -17,7 +17,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Book 
+public class Book implements Comparable <Book> 
+
+							//Comparable è un'interfaccia standard di Java usata da tanyi classi per stabilire 
+							//se 
+
 {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -29,6 +33,34 @@ public class Book
 	
 	@ManyToOne(fetch = FetchType.EAGER) //quando leggi un libro dal db leggi in automatico sempre il suo padre
 	@JoinColumn(name="authorid")	//nome colonna chiave esterna su mySQL
-	private Author autore; 
+	private Author autore;
+
+	@Override
+	public int compareTo(Book o) //può restituire un numero negativo se this è più piccolo di o ( di altro libro)
+	{								//può restituire 0 se this è uguale a o (altro libro)
+									//può restituire 1 se this è più grande o (altro libro)
+									//il criterio di confronto (qua id) lo stabiliamo noi.
+		if(this.id<o.id)
+			return -1;
+		if(this.id==o.id)
+			return 0;
+		return 1;
+	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if(!(o instanceof Book))
+			return false;
+		Book b= (Book) o;
+		return this.id==b.id;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return id;
+	}
+	
 	
 }

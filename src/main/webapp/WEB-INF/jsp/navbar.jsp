@@ -23,7 +23,8 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link active" href="#">Autori</a>
-        <a class="nav-link active" href="#">Libri</a>
+        <a class="nav-link active" href="/bookscatalogue">Libri</a>
+        <a class="nav-link active" href="/cartpage">Carrello</a>
         <a class="nav-link active text-primary" style="margin-left:475%" href="/logout">Logout</a>
       </div>
     </div>
