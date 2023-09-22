@@ -27,8 +27,8 @@ public class Book
 	private int numberOfPages;
 	private double price;
 	
-	@ManyToOne(fetch = FetchType.EAGER) //quando leggi dispositivo leggi in automatico sempre il suo padre
-	@JoinColumn(name="authorid")	
+	@ManyToOne(fetch = FetchType.EAGER) //quando leggi un libro dal db leggi in automatico sempre il suo padre
+	@JoinColumn(name="authorid")	//nome colonna chiave esterna su mySQL
 	private Author autore; 
 	
 }

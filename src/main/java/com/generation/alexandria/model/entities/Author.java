@@ -26,7 +26,7 @@ public class Author
 	private Integer id;
 	private String name, surname;
 	private LocalDate dob;
-	
-	@OneToMany (mappedBy = "autore", fetch = FetchType.EAGER)
+							//nome della proprietà in book dove è mappata la relazione
+	@OneToMany (mappedBy = "autore", fetch = FetchType.EAGER)//lato 1 della relazione autore-liber
 	private List <Book> libriScritti;
 }
