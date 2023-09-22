@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,24 +25,23 @@
 	</style>
    	
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Register</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
-<!--  dentro test va un boolean che condiziona l'esecuzione di righe 14-17 -->
+
 	<div class="bg-light">
-		<form name="tempusr" action="login" method="post" modelAttribute="tempusr" onsubmit="hashPass();">
+		<form name="tempusr" action="register" method="post" modelAttribute="tempusr" onsubmit="hashPass();">
 		  <div class="form-group">
-		    <input type="text" class="form-control" name= "username" placeholder="Enter username">
+		    <input type="text" class="form-control" minlength="4" name= "username" placeholder="Enter username">
 		  </div>
 		  <div class="form-group">
-		    <input type="text" class="form-control" name="password" placeholder="Enter password">
+		    <input type="password" minlength="4" class="form-control" name="password" placeholder="Enter password">
 		  </div>
 		  <div>
-		 	<button  type="submit" class="btn btn-primary">Login</button>
-		  	<a href="/guestlogin" class="btn btn-secondary"> Continua come ospite </a>
-		  	<a href="/registrationpage" style="float:right" class="btn btn-danger"> Registrati </a>
+		 	<button  type="submit" class="btn btn-primary">Registrati</button>
+		 	<a href="/guestlogin" style="float:right" class="btn btn-secondary"> Continua come ospite </a>
 		   </div>
 		</form>
 		

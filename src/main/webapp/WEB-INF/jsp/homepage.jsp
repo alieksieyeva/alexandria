@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="navbar.jsp"/>
 	<h1> Benvenuto ${user.getUsername()}</h1>
 </body>
 </html>
