@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="https://cdn-icons-png.flaticon.com/512/3145/3145816.png" alt="" width="24" height="24" class="d-inline-block align-text-top">

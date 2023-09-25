@@ -30,10 +30,11 @@ public class Book implements Comparable <Book>
 	private String title, synopsis;
 	private int numberOfPages;
 	private double price;
+	private String imgUrl;
 	
 	@ManyToOne(fetch = FetchType.EAGER) //quando leggi un libro dal db leggi in automatico sempre il suo padre
 	@JoinColumn(name="authorid")	//nome colonna chiave esterna su mySQL
-	private Author autore;
+	private Author author;
 
 	@Override
 	public int compareTo(Book o) //può restituire un numero negativo se this è più piccolo di o ( di altro libro)

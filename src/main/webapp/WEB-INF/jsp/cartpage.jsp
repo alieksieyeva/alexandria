@@ -10,13 +10,34 @@
 <body>
 	<jsp:include page="navbar.jsp"/>
 	<c:forEach var="book" items="${cart.getItems().keySet()}" > 
-			<p class="text-light bg-dark fs-4" style="padding-left:15px; margin-left:15px">	${book.getTitle()} 
-			${book.getPrice()}  &euro;
-			${cart.getTotalPrice(book)}  &euro;
-			<a href="/addToCart?id=${book.getId()}&copies=-1&src=cartpage" > - </a> 
-			<span style="float:right; padding-right:10px"> ${cart.getCopies(book)}</span></p>
-			<a href="/addToCart?id=${book.getId()}&copies=1&src=cartpage" > + </a> 
-			
+			<p 
+				class="text-light bg-dark fs-4" 
+				style="padding-left:15px;margin-left:15px"
+			>	
+				${book.getTitle()} 
+				&emsp;&emsp;
+				${book.getPrice()}  &euro;&emsp;&emsp;
+				${cart.getTotalPrice(book)}  &euro;
+				<span style="float:right; padding-right:10px"> 
+					<a 
+						href="/addToCart?id=${book.getId()}&copies=-1&src=cartpage" 
+						class="btn btn-outline-warning btn-sm border-0"
+						style="margin-bottom:10%;height:0.8rem !important;padding-bottom:30%"
+					>
+						<b >- </b>
+					</a> 
+					
+						${cart.getCopies(book)}
+					
+					<a
+						href="/addToCart?id=${book.getId()}&copies=1&src=cartpage"
+						class="btn btn-outline-warning btn-sm border-0" 
+						style="margin-bottom:10%;height:0.8rem !important;padding-bottom:30%"
+					>
+						<b>+</b> 
+					</a> 
+				</span>
+			</p>
 	</c:forEach>
 	
 </body>

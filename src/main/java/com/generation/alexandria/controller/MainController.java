@@ -139,5 +139,13 @@ public class MainController
 	{
 		return "cartpage";
 	}
+	
+	@GetMapping("/bookdetail")
+	public String bookDetail(@RequestParam Integer id, Model m)
+	{									//findById(id) restituisce un Optional!!!
+		m.addAttribute("book", bookRepo.findById(id).get());
+		
+		return "bookdetail";
+	}
 }
 
