@@ -23,7 +23,6 @@ public class Book implements Comparable <Book>
 
 							//Comparable è un'interfaccia standard di Java usata da tanyi classi per stabilire 
 							//se 
-
 {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

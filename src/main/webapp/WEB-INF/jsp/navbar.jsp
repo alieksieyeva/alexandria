@@ -29,6 +29,12 @@
         <c:if test="${user.getLevel()<=1 }">
         	<a class="nav-link active" href="/orderspage">Orders</a>
         </c:if>
+        <c:if test="${user.getLevel()==0 }">
+        	<a class="nav-link active" href="/createbook">New_Book</a>
+        </c:if>
+        <c:if test="${user.getLevel()==0 }">
+        	<a class="nav-link active" href="/createauthor">New_Author</a>
+        </c:if>
         <a class="nav-link active text-primary" style="margin-left:475%" href="/logout">Logout</a>
       </div>
     </div>

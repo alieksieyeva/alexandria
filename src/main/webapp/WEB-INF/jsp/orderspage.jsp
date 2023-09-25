@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"/>
-		<div class="container text-center fs-1">
+	<div class="container text-center fs-1">
 		Lista ordini
 	 	</div>
 	 	<div class="row">
@@ -17,18 +17,19 @@
 	 	</div>
 		<div class="row" id= "colonna"> 
 	  
-		<div class="col-6 p-t"> 
+		<div class="col-9 p-t"> 
 			<c:forEach var="order" items="${orders}" > 
 			<p 
 				class="text-light bg-dark fs-4" 
 				style="padding-left:15px; margin-left:15px"
-			>	${order.getId()} &emsp;  Spedizione:${order.getOrderDate()} &emsp; Consegna prevista:${order.getDeliveryDate()} 
+			>	ID ${order.getId()} &emsp;  Spedizione: ${order.getOrderDate()} &emsp; Consegna prevista: ${order.getDeliveryDate()} 
 			</p>
+			
 			</c:forEach>
 		</div>
-		<div class="col-6">
-		<c:forEach var="book" items="${books}" > 
-					<p><a href="#?id=${book.getId()}" class="btn btn-secondary">Più informazioni</a></p>
+		<div class="col-3">
+		<c:forEach var="order" items="${orders}" > 
+					<p><a href="orderdetail?id=${order.getId()}" class="btn btn-primary">Più informazioni</a></p>
 			
 		</c:forEach>
 		</div>

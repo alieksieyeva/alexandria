@@ -15,6 +15,8 @@ import com.generation.alexandria.model.entities.Book;
 import com.generation.alexandria.model.entities.Cart;
 import com.generation.alexandria.model.entities.Order;
 import com.generation.alexandria.model.entities.User;
+import com.generation.alexandria.model.entities.dto.BookDTO;
+import com.generation.alexandria.model.entities.dto.Mapper;
 import com.generation.alexandria.model.repository.AuthorRepository;
 import com.generation.alexandria.model.repository.BookRepository;
 import com.generation.alexandria.model.repository.OrderRepository;
@@ -36,7 +38,12 @@ public class MainController
 	@Autowired
 	OrderRepository orderRepo;
 	
+	@Autowired
+	Mapper mapper;
+	
+	
 	@GetMapping("/")
+
 	public String initialPage(Model model)
 	{
 		User currentUser =(User) model.getAttribute("user");		//tutti attributi in Model sono "Object";
@@ -184,5 +191,57 @@ public class MainController
 		
 		return "orderspage";
 	}
+	
+	@GetMapping("/createbook")
+	public String createBook()
+	{
+		return "createbook";
+	}
+	
+	@PostMapping("/newbook")
+	public String newBook(@ModelAttribute("newbook")BookDTO bookdto)
+	{
+		Book b = mapper.dtoToBook(bookdto);
+		
+		bookRepo.save(b);
+		
+		return "createbook";
+	}
+	
+//	@GetMapping("/orderdetail")
+//	public String orderDetail(@RequestParam Integer id, Model m)
+//	{
+//		Order o= orderRepo.findById(id).get();
+//		
+//
+//		String items = o.getItems();
+//		//items: Idlibro1_-_Numero1;:;Idlibro2_-_Numero2;:;Idlibro3_-_Numero3
+//		
+//		
+//		String [] splitPerItem = items.split(";:;");
+//		//splitPerItem: Idlibro1_-_Numero1 ->0, Idlibro2_-_Numero2->1
+//		String [] splitItemId;
+//		Map <Integer, Integer> ids = new HashMap<Integer, Integer>();
+//		
+//		for(String s: splitPerItem )
+//		{	
+//			splitItemId = s.split("_-_");
+//			int idLibro = Integer.parseInt(splitItemId[0]);
+//			int numeroUnità =Integer.parseInt(splitItemId[1]);
+//			ids.put(idLibro, numeroUnità);
+//		}
+//		
+//		List <Book> allBooks = bookRepo.findAll();
+//		Map <Book, Integer> forJsp= new HashMap <Book, Integer>();
+//		
+//		for(Book b: allBooks)
+//			if(ids.containsKey(b.getId()))
+//				forJsp.put(b, );
+//					
+//		m.addAttribute("books", forJsp);
+//		m.addAttribute("order", o);
+//	
+//		return "orderdetail";
+//	}
 }
 

@@ -22,11 +22,14 @@
 			<p class="text-light bg-dark fs-4" style="padding-left:15px; margin-left:15px">	${book.getTitle()} <span style="float:right; padding-right:10px"> ${book.getPrice()} &euro; </span></p>
 			</c:forEach>
 		</div>
-		<div class="col-6">
+		<div class="col-3">
 		<c:forEach var="book" items="${books}" > 
 					<a href="#?id=${book.getId()}" class="btn btn-secondary">Più informazioni </a>
-					<a href="addToCart?id=${book.getId()}&copies=1" class="btn btn-primary" onclick="alert('Libro aggiunto');">Aggiungi al carrello </a>
-			
+		</c:forEach>
+		</div>
+		<div class="col-3">
+		<c:forEach var="book" items="${books}" > 
+			<a href="addToCart?id=${book.getId()}&copies=1" class="btn btn-primary" onclick="alert('Libro aggiunto');">Aggiungi al carrello </a>
 		</c:forEach>
 		</div>
 	</div>
