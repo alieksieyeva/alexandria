@@ -11,12 +11,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 public class Book implements Comparable <Book> 
 
 							//Comparable è un'interfaccia standard di Java usata da tanyi classi per stabilire 
@@ -34,6 +36,7 @@ public class Book implements Comparable <Book>
 	
 	@ManyToOne(fetch = FetchType.EAGER) //quando leggi un libro dal db leggi in automatico sempre il suo padre
 	@JoinColumn(name="authorid")	//nome colonna chiave esterna su mySQL
+	@ToString.Exclude
 	private Author author;
 
 	@Override

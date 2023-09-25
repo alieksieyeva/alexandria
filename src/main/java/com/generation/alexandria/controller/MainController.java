@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.generation.alexandria.model.entities.Book;
 import com.generation.alexandria.model.entities.Cart;
+import com.generation.alexandria.model.entities.Order;
 import com.generation.alexandria.model.entities.User;
 import com.generation.alexandria.model.repository.AuthorRepository;
 import com.generation.alexandria.model.repository.BookRepository;
@@ -146,6 +147,42 @@ public class MainController
 		m.addAttribute("book", bookRepo.findById(id).get());
 		
 		return "bookdetail";
+	}
+	
+	@GetMapping("/authordetail")
+	public String authorDetail(@RequestParam Integer id, Model m)
+	{									//findById(id) restituisce un Optional!!!
+		m.addAttribute("author", authorRepo.findById(id).get());
+		
+		//System.out.println(authorRepo.findById(id).get());
+		//m.addAttribute("books", new ArrayList<Book>(authorRepo.findById(id).get().getLibriScritti()));
+		
+		return "authordetail";
+	}
+	
+	@GetMapping("/buy")
+	public String buy(Model m)
+	{
+		
+		Cart c = (Cart) m.getAttribute("cart");
+		Order o = c.convertToOrder();
+		o.setBuyer((User) m.getAttribute("user"));
+		
+		m.addAttribute("cart", new Cart());
+		
+		orderRepo.save(o);
+		
+		return "successbuy";
+	}
+	
+	@GetMapping("/orderspage")
+	public String orders(Model m)
+	{
+		User u = (User) m.getAttribute("user");
+		
+		m.addAttribute("orders", orderRepo.findByBuyer(u));
+		
+		return "orderspage";
 	}
 }
 

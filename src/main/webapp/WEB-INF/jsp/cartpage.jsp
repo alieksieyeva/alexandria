@@ -9,6 +9,29 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"/>
+	<p 
+		class="text-light bg-dark fs-4" 
+		style="padding-left:15px;margin-left:15px"
+		
+	>
+		Prezzo totale: ${cart.getTotalPrice()} &euro;
+		<c:if test="${user.getLevel()<=1}">
+			<a 
+				href="/buy" 
+				class="btn btn-danger btn-lg"
+				style="float:right"
+			> ACQUISTA
+			</a>
+		</c:if>
+		<c:if test="${user.getLevel()>1}">
+			<a 
+				href="/" 
+				class="btn btn-danger btn-lg"
+				style="float:right"
+			> LOGGATI PER ACQUISTARE
+			</a>
+		</c:if>
+	</p>
 	<c:forEach var="book" items="${cart.getItems().keySet()}" > 
 			<p 
 				class="text-light bg-dark fs-4" 

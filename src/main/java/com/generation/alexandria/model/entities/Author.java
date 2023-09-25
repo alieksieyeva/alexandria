@@ -13,12 +13,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 public class Author
 {
 	@Id
@@ -26,6 +28,7 @@ public class Author
 	private Integer id;
 	private String name, surname;
 	private LocalDate dob;
+	private String imgUrl;
 							//nome della proprietà in book dove è mappata la relazione
 	@OneToMany (mappedBy = "author", fetch = FetchType.EAGER)//lato 1 della relazione autore-liber
 	private List <Book> libriScritti;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,9 @@
         <a class="nav-link active" href="#">Autori</a>
         <a class="nav-link active" href="/bookscatalogue">Libri</a>
         <a class="nav-link active" href="/cartpage">Carrello</a>
+        <c:if test="${user.getLevel()<=1 }">
+        	<a class="nav-link active" href="/orderspage">Orders</a>
+        </c:if>
         <a class="nav-link active text-primary" style="margin-left:475%" href="/logout">Logout</a>
       </div>
     </div>
